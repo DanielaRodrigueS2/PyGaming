@@ -15,7 +15,7 @@ cores = [
 
 
 # screen size
-screen_length = 1280
+screen_length = 800
 screen_height = 800
 
 # Enemy create
@@ -26,7 +26,7 @@ enemys = []
 screen = pygame.display.set_mode((screen_length,screen_height))
 
 # boss atributtes
-boss_x = 0
+boss_x = (screen_length // 2 ) - 400
 boss_y = 0
 boss = pygame.Rect(boss_x, boss_y, 800, 256)
 boss_sprite = pygame.image.load('./imgs/Boss1.png').convert()
@@ -92,14 +92,16 @@ def manage_shots():
                 print(score)
 
         if shot.colliderect(boss):
-            bosslife -= 25
+            boss_life -= 25
+            shots.remove(shot)
+
     if lifes <= 0:
         running = False
         
 # create enemy function
 def create_enemy():
     x = random.randrange(0 , screen_length - enemy_size)
-    y = random.randrange(200 , (screen_length // 5) - enemy_size)
+    y = random.randrange(200 , (screen_height // 2) - enemy_size)
     enemy = pygame.Rect(x, y, enemy_size, enemy_size)
     enemys.append(enemy)
 
