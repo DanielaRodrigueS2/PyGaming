@@ -42,8 +42,9 @@ posicao_x = 400
 posicao_y = 600
 player = pygame.Rect(posicao_x, posicao_y, 64,64)
 sprite = pygame.image.load('./imgs/NaveVerde.png').convert()
-lifes = 3
+lifes = 4
 score = 0
+player_hitbox = True
 
 # Font declaration
 font = pygame.font.SysFont('Comic Sans MS', 32)
@@ -66,7 +67,7 @@ def player_moviment(key):
         player.x -= 5
     if key[pygame.K_DOWN] and player.y < (screen_length - 64):
         player.y += 5
-    if key[pygame.K_UP] and player.y >= screen_height / 2:
+    if key[pygame.K_UP] and player.y >= screen_height // 3:
         player.y -= 5   
     if key[pygame.K_SPACE] and can_shot:
         create_shot()
@@ -112,16 +113,18 @@ def create_enemy():
 
 # generate enemy function
 def generate_enemy():
-    global lifes 
+    global lifes, player_hitbox
+
     for enemy in enemys:
         pygame.draw.rect(screen, cores[1], enemy)
         y = random.randrange(1,5)
         enemy.y += y
         if enemy.y == posicao_y or enemy.y == screen_height:
             enemys.remove(enemy)
-        elif player.contains(enemy):
+        elif player.contains(enemy) and player_hitbox:
             enemys.remove(enemy)
             lifes -= 1
+            player_hitbox = False
 
 def create_boss_attack():
     spawn = random.randrange(100, 300)
@@ -132,7 +135,7 @@ def create_boss_attack():
 
 def boss_attack():
 
-    global boss_can_attack
+    global player_hitbox, lifes
     timer = False
     
     for attack in attacks:
@@ -141,7 +144,6 @@ def boss_attack():
         pygame.draw.rect(screen, cores[6], attack)
 
         attack.y += 5
-
         if timer:
             attack.y -= 5
             attack.x += 3
@@ -153,6 +155,12 @@ def boss_attack():
         if attack.y >= 900:
             attacks.remove(attack)
 
+        if attack.colliderect(player) and player_hitbox:
+            lifes -= 1
+            player_hitbox = False
+
+
+
 # Personalizade events
 ENEMY_EVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(ENEMY_EVENT, 200)
@@ -162,6 +170,9 @@ pygame.time.set_timer(RELOAD_EVENT, 500)
 
 BOSS_ATTACK_EVENT = pygame.USEREVENT + 3
 pygame.time.set_timer(BOSS_ATTACK_EVENT, 4000)
+
+RESET_HITBOX_EVENT = pygame.USEREVENT + 4
+pygame.time.set_timer(RESET_HITBOX_EVENT, 2500)
 
 while running:
 
@@ -199,6 +210,10 @@ while running:
 
         elif event.type == BOSS_ATTACK_EVENT:
             create_boss_attack()
+
+        elif event.type == RESET_HITBOX_EVENT:
+            if not player_hitbox:
+                player_hitbox = True
 
     key = pygame.key.get_pressed()
 
