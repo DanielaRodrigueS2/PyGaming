@@ -10,7 +10,8 @@ cores = [
     (255, 0, 255),
     (255, 0, 0),
     (0, 255, 255),
-    (0,0,0)
+    (0,0,0),
+    (0, 0, 255)
 ]
 
 
@@ -27,10 +28,13 @@ screen = pygame.display.set_mode((screen_length,screen_height))
 
 # boss atributtes
 boss_x = (screen_length // 2 ) - 400
-boss_y = 0
+boss_y = 20
 boss = pygame.Rect(boss_x, boss_y, 800, 256)
 boss_sprite = pygame.image.load('./imgs/Boss1.png').convert()
-boss_life = 500
+boss_life = 800
+
+# boss health bar atributtes
+# health_bar = pygame.Rect(0, screen_height - 50, boss_life, 50)
 
 # player atributtes
 posicao_x = 400
@@ -79,7 +83,7 @@ def manage_shots():
     global score, running, boss_life
     
     for shot in shots:
-        pygame.draw.rect(screen, cores[2], shot)
+        pygame.draw.rect(screen, cores[5], shot)
         shot.y -= 5
         if shot.y == 0:
             shots.remove(shot)
@@ -139,9 +143,13 @@ while running:
     screen.blit(player_lifes, (50, screen_height - 50))
     screen.blit(player_score, (screen_length - 200, screen_height - 50))
 
-    # draing boss
+    # drawing boss
     pygame.draw.rect(screen, cores[0], boss)
     screen.blit(boss_sprite, boss)
+
+    # drawing health bar
+    health_bar = pygame.Rect(0, 0, boss_life, 10)
+    pygame.draw.rect(screen, cores[2], health_bar )
 
     # Drawing player
     pygame.draw.rect(screen, cores[0], player)
