@@ -143,10 +143,11 @@ def boss_attack():
         attack.y += 5
 
         if timer:
+            attack.y -= 5
             attack.x += 3
             timer = False
         else:
-            attack.x -= 2
+            attack.x -= 3
             timer = True
 
         if attack.y >= 900:
