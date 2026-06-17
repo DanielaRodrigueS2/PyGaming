@@ -1,6 +1,8 @@
 import pygame
 
 class Screen:
-    def __init__ (self, tittle, widht, height, fill):
+    def __init__ (self, tittle, width, height, fill):
         self.tittle = tittle
-        self.
+        self.width = width
+        self.height = height
+        self.fill = fill
