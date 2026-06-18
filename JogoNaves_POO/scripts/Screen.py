@@ -1,8 +1,17 @@
-import pygame
+import pygame as pg
 
 class Screen:
-    def __init__ (self, tittle, width, height, fill):
-        self.tittle = tittle
-        self.width = width
+    def __init__ (self, game, width, height):
+        self.game = game
+        self.widht = width
         self.height = height
-        self.fill = fill
+        
+    def update(self):
+        pass
+    
+    def handle_events(self, event):
+        pass
+
+    def drawn (self, surface):
+        pass
+    
