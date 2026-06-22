@@ -18,7 +18,7 @@ class GameScreen(Screen):
 
         #Events Timer
         pg.time.set_timer(self.ENEMY_EVENT, 200)
-        pg.time.set_timer(self.RELOAD_EVENT, 500)
+        pg.time.set_timer(self.RELOAD_EVENT, 300)
         pg.time.set_timer(self.BOSS_ATTACK_EVENT, 4000)
         pg.time.set_timer(self.RESET_HITBOX_EVENT, 2500)
 
@@ -47,7 +47,8 @@ class GameScreen(Screen):
     def check_collisions(self):
 
         pg.sprite.groupcollide(self.shots, self.enemies, False, True)
-        pg.sprite.spritecollide(self.player, self.shots, True)
+        if pg.sprite.spritecollide(self.player, self.enemies, True):
+            self.player.lifes -= 1
         
 
     def draw(self, screen):
