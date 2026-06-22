@@ -1,7 +1,7 @@
 import pygame as pg
 
 class Player(pg.sprite.Sprite):
-    def __init__(self, img):
+    def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load('../assets/imgs/NaveVerde.png').convert_alpha()
         self.rect = self.image.get_rect()
@@ -24,5 +24,5 @@ class Player(pg.sprite.Sprite):
             # create_shot()
             can_shot = False
 
-    def drawn(self, screen):
+    def draw(self, screen):
         screen.blit(self.image, self.rect)
