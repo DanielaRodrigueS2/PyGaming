@@ -1,6 +1,7 @@
 from scripts.Screen import Screen
 from scripts.Player import Player
 from scripts.Enemy import Enemy
+from scripts.Boss import Boss
 from scripts.PlayerShot import PlayerShot
 import pygame as pg
 
@@ -26,10 +27,12 @@ class GameScreen(Screen):
         self.enemies = pg.sprite.Group()
         self.shots = pg.sprite.Group()
         self.player = Player()
+        self.boss = Boss()
 
     def update(self):
         
         self.player.update()
+        self.boss.update()
         self.enemies.update()
         self.shots.update()
 
@@ -58,6 +61,7 @@ class GameScreen(Screen):
 
         # Player/Enemies
         self.player.draw(screen)
+        self.boss.draw(screen)
         self.shots.draw(screen)
         self.enemies.draw(screen)
 
