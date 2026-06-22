@@ -10,6 +10,7 @@ class GameScreen(Screen):
         self.player = Player()
 
     def update(self):
+        
         self.player.update()
 
     
