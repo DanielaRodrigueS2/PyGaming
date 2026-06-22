@@ -7,7 +7,7 @@ class MenuScreen(Screen):
     def __init__(self, game):
         super().__init__(game)
 
-        self.font = pg.font.SysFont('Comic Sans MS', 40)
+        self.font = pg.font.SysFont('Comic Sans MS', 30)
 
     def handle_events(self, event):
         if event.type == pg.KEYDOWN:
@@ -20,12 +20,22 @@ class MenuScreen(Screen):
         pass
 
     def draw(self, surface):
-        surface.fill((40,40,40))
+        surface.fill((0,0,0))
 
-        text = self.font.render('PRESSIONE ENTER PARA INICIAR', True, (255,255,255))
+        # Initial Text
+        text_iniciar = self.font.render('PRESSIONE ENTER PARA INICIAR', True, (255,255,255))
+        text_center = text_iniciar.get_rect(center=(400,350))
+        surface.blit(text_iniciar, text_center)
 
-        surface.blit(text, (70, 180))
+        # Game Name
+        game_name = pg.font.SysFont('Comic Sans MS', 60).render('WEWE SPACE', True, (255,255,20))
+        game_name_center = game_name.get_rect(center=(400, 100))
+        surface.blit(game_name, game_name_center)
 
+        # Credits
+        dev_name = pg.font.SysFont('Comic Sans MS', 20).render('Made by: DanielaRodrigueS2', True, (0,255,20))
+        dev_name_center = dev_name.get_rect(center = (400, 700))
+        surface.blit(dev_name, dev_name_center)
 
 
 

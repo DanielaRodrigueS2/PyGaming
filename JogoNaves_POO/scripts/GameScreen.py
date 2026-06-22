@@ -15,6 +15,7 @@ class GameScreen(Screen):
     def __init__(self, game):
 
         super().__init__(game)
+        self.font = pg.font.SysFont('Comic Sans MS', 32)
 
         #Events Timer
         pg.time.set_timer(self.ENEMY_EVENT, 200)
@@ -52,8 +53,15 @@ class GameScreen(Screen):
         
 
     def draw(self, screen):
-
+ 
         screen.fill((50, 100, 100))
+
+        # Player/Enemies
         self.player.draw(screen)
         self.shots.draw(screen)
         self.enemies.draw(screen)
+
+        #Text
+
+        lifes = self.font.render(f'Lifes: {self.player.lifes}', True, (255,255,255))
+        screen.blit(lifes, (50, 750))
