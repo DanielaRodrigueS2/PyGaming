@@ -1,6 +1,7 @@
 from scripts.Screen import Screen
 from scripts.Player import Player
 from scripts.Enemy import Enemy
+from scripts.PlayerShot import PlayerShot
 import pygame as pg
 
 
@@ -22,24 +23,28 @@ class GameScreen(Screen):
         pg.time.set_timer(self.RESET_HITBOX_EVENT, 2500)
 
         self.enemies = pg.sprite.Group()
+        self.shots = pg.sprite.Group()
         self.player = Player()
 
     def update(self):
         
         self.player.update()
-
         self.enemies.update()
+        self.shots.update()
 
-    
     def handle_events(self, event):
         if event.type == self.ENEMY_EVENT:
             enemy = Enemy()
             self.enemies.add(enemy)
+
+        if event.type == self.RELOAD_EVENT:
+            self.player.reload()
+            self.player.manageShots(self.shots)
         
 
     def draw(self, screen):
 
         screen.fill((50, 100, 100))
         self.player.draw(screen)
-
+        self.shots.draw(screen)
         self.enemies.draw(screen)

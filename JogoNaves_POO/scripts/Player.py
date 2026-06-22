@@ -1,5 +1,6 @@
 import pygame as pg
 import os
+from scripts.PlayerShot import PlayerShot
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -21,6 +22,7 @@ class Player(pg.sprite.Sprite):
         self.speed = 5
         self.lifes = 3
         self.can_shot = True
+        self.confirm = True
 
     def update(self):
         key = pg.key.get_pressed()
@@ -33,8 +35,17 @@ class Player(pg.sprite.Sprite):
         if key[pg.K_UP] and self.rect.y >= 800 // 3:
             self.rect.y -= self.speed
         if key[pg.K_SPACE] and self.can_shot:
-            # create_shot()
+            self.confirm = True
+
+    def manageShots(self, shots):
+        if self.can_shot and self.confirm:
+            shot = PlayerShot(self.rect.x, self.rect.y)
+            shots.add(shot)
             self.can_shot = False
+            self.confirm = False
+
+    def reload(self):
+        self.can_shot = True
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)

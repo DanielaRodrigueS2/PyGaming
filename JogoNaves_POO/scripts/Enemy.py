@@ -21,4 +21,4 @@ class Enemy(pg.sprite.Sprite):
             self.kill
 
     def draw(self, screen):
-        pg.draw.rect(screen, (255, 0, 255), self.rect)
+        screen.blit(self.image, self.rect)
