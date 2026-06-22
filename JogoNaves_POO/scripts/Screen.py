@@ -1,10 +1,8 @@
 import pygame as pg
 
 class Screen:
-    def __init__ (self, game, width, height):
+    def __init__ (self, game):
         self.game = game
-        self.widht = width
-        self.height = height
         
     def update(self):
         pass

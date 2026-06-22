@@ -1,18 +1,22 @@
-from Screen import Screen
-from Player import Player
+from scripts.Screen import Screen
+from scripts.Player import Player
 import pygame as pg
 
 class GameScreen(Screen):
-    def __init__(self, game, sprites):
-        super.__init__(game)
+    def __init__(self, game):
+
+        super().__init__(game)
 
         self.player = Player()
 
     def update(self):
         self.player.update()
+
+    
+    def handle_events(self, event):
+        pass
         
 
     def draw(self, screen):
-        
-        self.fill((50, 100, 100))
+        screen.fill((50, 100, 100))
         self.player.draw(screen)

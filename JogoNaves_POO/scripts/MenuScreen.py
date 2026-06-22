@@ -1,4 +1,5 @@
-from Screen import Screen
+from scripts.Screen import Screen
+from scripts.GameScreen import GameScreen
 import pygame as pg
 
 class MenuScreen(Screen):
@@ -6,12 +7,14 @@ class MenuScreen(Screen):
     def __init__(self, game):
         super().__init__(game)
 
-        self.font = pg.font.SysFont('Comic Sans MS', 60)
+        self.font = pg.font.SysFont('Comic Sans MS', 40)
 
     def handle_events(self, event):
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_RETURN:
-                self.game.change_screen("game")
+                self.game.change_current_screen(
+                    GameScreen(self.game)
+                )
 
     def update(self):
         pass
@@ -21,7 +24,7 @@ class MenuScreen(Screen):
 
         text = self.font.render('PRESSIONE ENTER PARA INICIAR', True, (255,255,255))
 
-        surface.blit(text, (200, 180))
+        surface.blit(text, (70, 180))
 
 
 
