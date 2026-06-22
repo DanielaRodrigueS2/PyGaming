@@ -32,6 +32,8 @@ class GameScreen(Screen):
         self.enemies.update()
         self.shots.update()
 
+        self.check_collisions()
+
     def handle_events(self, event):
         if event.type == self.ENEMY_EVENT:
             enemy = Enemy()
@@ -40,6 +42,12 @@ class GameScreen(Screen):
         if event.type == self.RELOAD_EVENT:
             self.player.reload()
             self.player.manageShots(self.shots)
+        
+
+    def check_collisions(self):
+
+        pg.sprite.groupcollide(self.shots, self.enemies, False, True)
+        pg.sprite.spritecollide(self.player, self.shots, True)
         
 
     def draw(self, screen):

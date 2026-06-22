@@ -22,7 +22,7 @@ class Player(pg.sprite.Sprite):
         self.speed = 5
         self.lifes = 3
         self.can_shot = True
-        self.confirm = True
+        self.confirm = False
 
     def update(self):
         key = pg.key.get_pressed()
