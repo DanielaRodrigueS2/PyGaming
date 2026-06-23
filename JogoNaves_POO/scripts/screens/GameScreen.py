@@ -53,6 +53,9 @@ class GameScreen(Screen):
         pg.sprite.groupcollide(self.shots, self.enemies, False, True)
         if pg.sprite.spritecollide(self.player, self.enemies, True):
             self.player.lifes -= 1
+
+        if pg.sprite.spritecollide(self.boss, self.shots, True):
+            self.boss.life -= 10
         
 
     def draw(self, screen):

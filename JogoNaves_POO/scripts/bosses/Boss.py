@@ -17,12 +17,13 @@ class Boss(pg.sprite.Sprite):
         self.image = pg.image.load(sprite_path).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.center = (400, 138)
-        self.life = 2000
+        self.life = 800
 
         self.life_bar = HealthBar(self.rect.centerx, self.rect.centery, self.life)
 
     def update(self):
-        pass
+        self.life_bar.update(self.life)
+        print(self.life)
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
