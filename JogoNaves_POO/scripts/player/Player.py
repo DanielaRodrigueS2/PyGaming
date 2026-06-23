@@ -1,8 +1,8 @@
 import pygame as pg
 import os
-from scripts.PlayerShot import PlayerShot
+from scripts.player.PlayerShot import PlayerShot
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 sprite_path = os.path.join(
     BASE_DIR,
