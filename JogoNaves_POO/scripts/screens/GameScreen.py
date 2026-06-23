@@ -1,4 +1,4 @@
-from scripts.Screen import Screen
+from scripts.screens.Screen import Screen
 from scripts.Player import Player
 from scripts.Enemy import Enemy
 from scripts.Boss import Boss

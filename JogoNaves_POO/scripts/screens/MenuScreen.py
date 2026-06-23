@@ -1,5 +1,5 @@
-from scripts.Screen import Screen
-from scripts.GameScreen import GameScreen
+from scripts.screens.Screen import Screen
+from scripts.screens.GameScreen import GameScreen
 import pygame as pg
 
 class MenuScreen(Screen):

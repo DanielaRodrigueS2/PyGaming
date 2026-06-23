@@ -1,5 +1,5 @@
 from scripts.Game import Game
-from scripts.MenuScreen import MenuScreen
+from scripts.screens.MenuScreen import MenuScreen
 
 game = Game()
 
