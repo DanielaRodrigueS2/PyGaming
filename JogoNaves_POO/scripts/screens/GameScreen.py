@@ -1,6 +1,7 @@
 from scripts.screens.Screen import Screen
 from scripts.player.Player import Player
 from scripts.enemies.Enemy import Enemy
+from scripts.enemies.Enemy2 import Enemy2
 from scripts.bosses.Boss import Boss
 from scripts.player.PlayerShot import PlayerShot
 import pygame as pg
@@ -12,6 +13,7 @@ class GameScreen(Screen):
     RELOAD_EVENT = pg.USEREVENT + 2
     BOSS_ATTACK_EVENT = pg.USEREVENT + 3
     RESET_HITBOX_EVENT = pg.USEREVENT + 4
+    ENEMY_EVENT2 = pg.USEREVENT + 5
 
     def __init__(self, game):
 
@@ -20,11 +22,13 @@ class GameScreen(Screen):
 
         #Events Timer
         pg.time.set_timer(self.ENEMY_EVENT, 200)
+        pg.time.set_timer(self.ENEMY_EVENT2, 10000)
         pg.time.set_timer(self.RELOAD_EVENT, 300)
         pg.time.set_timer(self.BOSS_ATTACK_EVENT, 4000)
         pg.time.set_timer(self.RESET_HITBOX_EVENT, 2500)
 
         self.enemies = pg.sprite.Group()
+        self.enemies2 = pg.sprite.Group()
         self.shots = pg.sprite.Group()
         self.player = Player()
         self.boss = Boss()
@@ -34,6 +38,7 @@ class GameScreen(Screen):
         self.player.update()
         self.boss.update()
         self.enemies.update()
+        self.enemies2.update()
         self.shots.update()
 
         self.check_collisions()
@@ -42,6 +47,15 @@ class GameScreen(Screen):
         if event.type == self.ENEMY_EVENT:
             enemy = Enemy()
             self.enemies.add(enemy)
+
+        if event.type == self.ENEMY_EVENT2:
+            self.enemies.empty()
+            for x in range(1,100):
+                enemy = Enemy2(-100, 0, 280, 800, 2, 5)
+                enemy2 = Enemy2(800, 900, 280, 800, -5, -2)
+                self.enemies2.add(enemy)
+                self.enemies2.add(enemy2)
+                print(x)
 
         if event.type == self.RELOAD_EVENT:
             self.player.reload()
@@ -67,6 +81,7 @@ class GameScreen(Screen):
         self.boss.draw(screen)
         self.shots.draw(screen)
         self.enemies.draw(screen)
+        self.enemies2.draw(screen)
 
         #Text
 

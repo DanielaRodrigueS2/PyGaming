@@ -3,7 +3,7 @@ import random as rd
 
 class Enemy2(pg.sprite.Sprite):
 
-    def __init__(self, x_random, x_random2, y_random, y_random2, speed):
+    def __init__(self, x_random, x_random2, y_random, y_random2, speed1, speed2):
         pg.sprite.Sprite.__init__(self)
 
         self.image = pg.Surface((20,20))
@@ -12,7 +12,7 @@ class Enemy2(pg.sprite.Sprite):
         self.y = rd.randrange(y_random, y_random2)
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
-        self.speed = speed
+        self.speed = rd.randrange(speed1, speed2)
 
     def update(self):
         self.rect.x += self.speed
