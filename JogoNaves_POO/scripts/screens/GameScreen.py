@@ -50,9 +50,9 @@ class GameScreen(Screen):
 
         if event.type == self.ENEMY_EVENT2:
             self.enemies.empty()
-            for x in range(1,100):
-                enemy = Enemy2(-100, 0, 280, 800, 2, 5)
-                enemy2 = Enemy2(800, 900, 280, 800, -5, -2)
+            for x in range(1,20):
+                enemy = Enemy2(-100, 0, 200, 800, 2, 5)
+                enemy2 = Enemy2(800, 900, 200, 800, -5, -2)
                 self.enemies2.add(enemy)
                 self.enemies2.add(enemy2)
                 print(x)
