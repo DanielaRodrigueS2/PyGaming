@@ -55,7 +55,7 @@ class GameScreen(Screen):
             self.player.lifes -= 1
 
         if pg.sprite.spritecollide(self.boss, self.shots, True):
-            self.boss.life -= 10
+            self.boss.life -= 25
         
 
     def draw(self, screen):
