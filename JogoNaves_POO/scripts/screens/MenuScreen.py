@@ -1,17 +1,20 @@
 from scripts.screens.Screen import Screen
 from scripts.screens.GameScreen import GameScreen
+from scripts.utils.MusicPlayer import MusicPlayer
 import pygame as pg
 
 class MenuScreen(Screen):
 
     def __init__(self, game):
         super().__init__(game)
-
+        self.music = MusicPlayer("menu_music")
         self.font = pg.font.SysFont('Comic Sans MS', 30)
+        self.music.play()
 
     def handle_events(self, event):
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_RETURN:
+                self.music.stop()
                 self.game.change_current_screen(
                     GameScreen(self.game)
                 )
