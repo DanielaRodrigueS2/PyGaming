@@ -20,6 +20,8 @@ class GameScreen(Screen):
         super().__init__(game)
         self.font = pg.font.SysFont('Comic Sans MS', 32)
 
+        self.enemy1_can_spawn = True
+
         #Events Timer
         pg.time.set_timer(self.ENEMY_EVENT, 200)
         pg.time.set_timer(self.ENEMY_EVENT2, 10000)
@@ -44,18 +46,22 @@ class GameScreen(Screen):
         self.check_collisions()
 
     def handle_events(self, event):
-        if event.type == self.ENEMY_EVENT:
+        if event.type == self.ENEMY_EVENT and self.enemy1_can_spawn:
             enemy = Enemy()
             self.enemies.add(enemy)
 
         if event.type == self.ENEMY_EVENT2:
             self.enemies.empty()
+            self.enemy1_can_spawn = False
             for x in range(1,20):
                 enemy = Enemy2(-100, 0, 200, 800, 2, 5)
                 enemy2 = Enemy2(800, 900, 200, 800, -5, -2)
                 self.enemies2.add(enemy)
                 self.enemies2.add(enemy2)
                 print(x)
+
+            if self.enemies2.sprites() is None:
+                self.enemy1_can_spawn = True
 
         if event.type == self.RELOAD_EVENT:
             self.player.reload()
